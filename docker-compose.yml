@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:latest
+        container_name: mysql-db
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        ports:
+            - ${DOCKER_DB_PORT}:3306
+        volumes:
+            - ${DOCKER_CONFIG_FOLDER}/mysql-data:/var/lib/mysql
+
+volumes:
+    db_data:
