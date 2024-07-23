@@ -36,7 +36,6 @@ class GenerateInvoicePdf
             ->currencyFormat('{SYMBOL}{VALUE}')
             ->notes($data['notes'] ?? '')
             ->addItems($this->getInvoiceItems($invoiceItems))
-            ->totalTaxes($data['vat'] ?? 0)
             ->setCustomData([
                 'from' => Carbon::parse($timePeriod['from'])->toDateString(),
                 'to' => Carbon::parse($timePeriod['to'])->toDateString(),
