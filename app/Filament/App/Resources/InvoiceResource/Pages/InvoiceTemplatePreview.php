@@ -7,7 +7,10 @@ use App\Models\Invoice;
 use App\Models\WorkSession;
 use Carbon\Carbon;
 use Filament\Facades\Filament;
+use Filament\Http\Middleware\Authenticate;
+use Filament\Panel;
 use Filament\Resources\Pages\Page;
+use Filament\Resources\Pages\PageRegistration;
 use Filament\Tables\Concerns\InteractsWithTable;
 use Filament\Tables\Contracts\HasTable;
 use Filament\Tables\Table;
@@ -22,6 +25,15 @@ class InvoiceTemplatePreview extends Page implements HasTable
 
     public string $template = '';
     public $invoice;
+
+    /**
+     * @param Panel $panel
+     * @return array|string
+     */
+    public static function getWithoutRouteMiddleware(Panel $panel): string | array
+    {
+        return [Authenticate::class];
+    }
 
     public function mount($template)
     {
